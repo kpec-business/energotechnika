@@ -204,22 +204,6 @@
             box-shadow: 0 6px 30px rgba(255, 107, 0, 0.5);
         }
 
-        .mobile-menu {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            padding: 10px;
-        }
-
-        .mobile-menu span {
-            width: 30px;
-            height: 3px;
-            background: var(--light);
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
         header {
             min-height: 100vh;
             display: flex;
@@ -1188,10 +1172,6 @@
                 display: none;
             }
 
-            .mobile-menu {
-                display: flex;
-            }
-
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -1509,7 +1489,7 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
                     </div>
                     <h4>Doświadczenie</h4>
-                    <p>Serwisujemy kotły przede wszystkim producenta defro, jednak znamy specyfikę urządzeń.</p>
+                    <p>Serwisujemy kotły różnych producentów. Znamy specyfikę urządzeń Metal-Fach, Defro, Kostrzewa, Pellas i wielu innych.</p>
                 </div>
                 <div class="feature-box">
                     <div class="feature-icon">
@@ -1822,10 +1802,28 @@
             });
         });
 
-        function toggleMenu() {
-            const nav = document.querySelector('.nav-links');
-            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-        }
+        const navLinks = document.querySelector('.nav-links');
+const mobileMenuBtn = document.querySelector('.mobile-menu');
+const navItems = document.querySelectorAll('.nav-links a');
+
+function toggleMenu() {
+    navLinks.classList.toggle('active');
+    mobileMenuBtn.classList.toggle('active');
+    
+    if (navLinks.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+}
+
+navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+});
 
         function createElectricLines() {
             const header = document.querySelector('header');
@@ -1852,7 +1850,9 @@
                 card.style.setProperty('--mouse-y', `${y}px`);
             });
         });
+
+
+
     </script>
 </body>
 </html>
-
